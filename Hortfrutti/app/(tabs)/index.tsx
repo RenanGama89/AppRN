@@ -1,19 +1,31 @@
 import React from 'react';
-import { StyleSheet, Button, Alert, TextInput, Image, Modal, Pressable, ActivityIndicator, FlatList, SectionList, Switch } from 'react-native';
+import {
+  StyleSheet,
+  Button,
+  Alert,
+  TextInput,
+  Image,
+  Modal,
+  Pressable,
+  ActivityIndicator,
+  FlatList,
+  SectionList,
+  Switch
+} from 'react-native';
+
 import { Text, View } from '@/components/Themed';
 import { SafeAreaView, SafeAreaProvider } from 'react-native-safe-area-context';
+import { FlexDemo } from '@/components/FlexDemo';
 
 export default function TabOneScreen() {
-  // Estados
   const [text, onChangeText] = React.useState('');
   const [number, onChangeNumber] = React.useState('');
   const [modalVisible, setModalVisible] = React.useState(false);
   const [loading, setLoading] = React.useState(true);
-  const [isEnabled, setIsEnabled] = React.useState(false); // Estado do Switch
+  const [isEnabled, setIsEnabled] = React.useState(false);
 
   const toggleSwitch = () => setIsEnabled(previousState => !previousState);
 
-  // Dados para FlatList
   const produtos = [
     { id: '1', nome: 'Cebola' },
     { id: '2', nome: 'Beterraba' },
@@ -21,7 +33,6 @@ export default function TabOneScreen() {
     { id: '4', nome: 'Cenoura' },
   ];
 
-  // Dados para SectionList
   const DATA = [
     { title: 'Frutas', data: ['Maçã', 'Banana', 'Laranja', 'Abacaxi'] },
     { title: 'Verduras', data: ['Alface', 'Couve', 'Espinafre'] },
@@ -44,6 +55,9 @@ export default function TabOneScreen() {
         onPress={() => Alert.alert('Tá funcionando!')}
         color={"#006414"}
       />
+
+      {/* Componente de Flexbox DEMO */}
+      <FlexDemo />
 
       {/* Switch para mudar cor do fundo */}
       <View style={{ flexDirection: 'row', alignItems: 'center', marginVertical: 10 }}>
@@ -85,13 +99,14 @@ export default function TabOneScreen() {
                   <ActivityIndicator size="large" color="#0000ff" />
                 ) : (
                   <>
-                  {/* FlatList (produtos) */}
+                    {/* FlatList (produtos) */}
                     <FlatList
                       data={produtos}
                       keyExtractor={(item) => item.id}
                       renderItem={({ item }) => <Text style={styles.item}>{item.nome}</Text>}
                       style={{ maxHeight: 150 }}
                     />
+
                     {/* SectionList */}
                     <SectionList
                       sections={DATA}
@@ -149,7 +164,7 @@ const styles = StyleSheet.create({
     fontSize: 55,
     fontWeight: 'bold',
     margin: 20,
-    color:"black",
+    color: "black",
   },
   logo: {
     width: 90,
